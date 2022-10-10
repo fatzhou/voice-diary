@@ -1,0 +1,45 @@
+export default {
+  back: require('../assets/images/return.png'),
+  avatar: require('../assets/images/avatar.png'),
+  checked: require('../assets/images/checked.png'),
+  select: require('../assets/images/select.png'),
+  close: require('../assets/images/close.png'),
+  unchecked: require('../assets/images/unchecked.png'),
+  ad: require('../assets/images/ad.png'),
+  next: require('../assets/images/next.png'),
+  appIcons: {
+    icon1: require('../assets/images/AppIcons/icon1.png'),
+    icon2: require('../assets/images/AppIcons/icon2.png'),
+    icon3: require('../assets/images/AppIcons/icon3.png'),
+  },
+  home: {
+    vip: require('../assets/images/Home/vip.png'),
+    setup: require('../assets/images/Home/setup.png'),
+    addNote: require('../assets/images/Home/addNote.png'),
+    add: require('../assets/images/Home/add.png'),
+  },
+  public: {
+    empty: require('../assets/images/Public/empty.png'),
+    more: require('../assets/images/Public/more.png'),
+  },
+  site: {
+    enter: require('../assets/images/Site/enter.png'),
+    more: require('../assets/images/Site/more.png'),
+    praise: require('../assets/images/Site/praise.png'),
+    preference: require('../assets/images/Site/preference.png'),
+    recommend: require('../assets/images/Site/recommend.png'),
+    safety: require('../assets/images/Site/safety.png'),
+    storage: require('../assets/images/Site/storage.png'),
+    theme: require('../assets/images/Site/theme.png'),
+    radioWithCheck: require('../assets/images/Site/radioWithCheck.png'),
+    addMoreBg: require('../assets/images/Site/addMoreBg.png'),
+  },
+  detail: {
+    editor: require('../assets/images/Detail/editor.png'),
+  },
+  addNote: {
+    image: require('../assets/images/AddNote/picture.png'),
+    listen: require('../assets/images/AddNote/listen.png'),
+    translation: require('../assets/images/AddNote/translation.png'),
+  },
+};
