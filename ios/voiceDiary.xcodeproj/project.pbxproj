@@ -14,6 +14,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-voiceDiary-voiceDiaryTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-voiceDiary-voiceDiaryTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		E074A540290035A0003791E8 /* NSObject+Home.m in Sources */ = {isa = PBXBuildFile; fileRef = E074A53F290035A0003791E8 /* NSObject+Home.m */; };
 		E093A8FD28EF1FE9005527F4 /* NSObject+Note.m in Sources */ = {isa = PBXBuildFile; fileRef = E093A8FC28EF1FE9005527F4 /* NSObject+Note.m */; };
 		E093A90028EF1FF8005527F4 /* NSObject+Detail.m in Sources */ = {isa = PBXBuildFile; fileRef = E093A8FF28EF1FF8005527F4 /* NSObject+Detail.m */; };
 		E093A90328F05D7A005527F4 /* NSObject+Protocol.m in Sources */ = {isa = PBXBuildFile; fileRef = E093A90228F05D7A005527F4 /* NSObject+Protocol.m */; };
@@ -46,12 +47,15 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-voiceDiary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-voiceDiary.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = voiceDiary/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-voiceDiary-voiceDiaryTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-voiceDiary-voiceDiaryTests.release.xcconfig"; path = "Target Support Files/Pods-voiceDiary-voiceDiaryTests/Pods-voiceDiary-voiceDiaryTests.release.xcconfig"; sourceTree = "<group>"; };
+		E074A53E290035A0003791E8 /* NSObject+Home.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Home.h"; sourceTree = "<group>"; };
+		E074A53F290035A0003791E8 /* NSObject+Home.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Home.m"; sourceTree = "<group>"; };
 		E093A8FB28EF1FE9005527F4 /* NSObject+Note.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Note.h"; sourceTree = "<group>"; };
 		E093A8FC28EF1FE9005527F4 /* NSObject+Note.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Note.m"; sourceTree = "<group>"; };
 		E093A8FE28EF1FF8005527F4 /* NSObject+Detail.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Detail.h"; sourceTree = "<group>"; };
 		E093A8FF28EF1FF8005527F4 /* NSObject+Detail.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Detail.m"; sourceTree = "<group>"; };
 		E093A90128F05D7A005527F4 /* NSObject+Protocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Protocol.h"; sourceTree = "<group>"; };
 		E093A90228F05D7A005527F4 /* NSObject+Protocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Protocol.m"; sourceTree = "<group>"; };
+		E0F0C1AB29003E2600E60C9F /* VoiceDiary-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VoiceDiary-Bridging-Header.h"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -107,6 +111,9 @@
 				E093A8FF28EF1FF8005527F4 /* NSObject+Detail.m */,
 				E093A90128F05D7A005527F4 /* NSObject+Protocol.h */,
 				E093A90228F05D7A005527F4 /* NSObject+Protocol.m */,
+				E074A53E290035A0003791E8 /* NSObject+Home.h */,
+				E074A53F290035A0003791E8 /* NSObject+Home.m */,
+				E0F0C1AB29003E2600E60C9F /* VoiceDiary-Bridging-Header.h */,
 			);
 			name = voiceDiary;
 			sourceTree = "<group>";
@@ -431,6 +438,7 @@
 				E093A90328F05D7A005527F4 /* NSObject+Protocol.m in Sources */,
 				E093A8FD28EF1FE9005527F4 /* NSObject+Note.m in Sources */,
 				E093A90028EF1FF8005527F4 /* NSObject+Detail.m in Sources */,
+				E074A540290035A0003791E8 /* NSObject+Home.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

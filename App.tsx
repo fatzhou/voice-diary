@@ -20,12 +20,12 @@ function App() {
   StatusBar.setBarStyle('dark-content');
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Note">
+      <Stack.Navigator initialRouteName="Home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
           options={{
-            headerShown: false,
+            headerShown: true,
           }}
         />
         <Stack.Screen
