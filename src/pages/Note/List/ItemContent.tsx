@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import {View, Text, Image} from 'react-native';
 import {StyleSheet} from 'react-native';
-import {ContentType} from './ListItem';
+import {ContentType} from '../../Home/components/ListItem';
 
 export default (props: any) => {
   const {content, type, image} = props;

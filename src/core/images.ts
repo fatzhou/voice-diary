@@ -17,6 +17,10 @@ export default {
     setup: require('../assets/images/Home/setup.png'),
     addNote: require('../assets/images/Home/addNote.png'),
     add: require('../assets/images/Home/add.png'),
+    audio: require('../assets/images/Home/audio.png'),
+    revoke: require('../assets/images/Home/revoke.png'),
+    close: require('../assets/images/Home/close.png'),
+    divider: require('../assets/images/Home/divider.png'),
   },
   public: {
     empty: require('../assets/images/Public/empty.png'),

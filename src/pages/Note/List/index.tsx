@@ -1,4 +1,4 @@
-import ItemSeparator from './ItemSeparator';
-import ListItem from './ListItem';
+import ItemSeparator from '../../Home/components/ItemSeparator';
+import ListItem from '../../Home/components/ListItem';
 
 export {ListItem, ItemSeparator};

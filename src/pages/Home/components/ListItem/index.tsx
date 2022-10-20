@@ -1,11 +1,11 @@
 import React, {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
-import ItemHeader from './ItemHeader';
+import ItemHeader from '../ItemHeader';
 import moment from 'moment';
-import ItemContent from './ItemContent';
-import {DebounceTouchableOpacity} from '../../../components';
-import {colors} from '../../../core/theme';
-import {Note, NoteType} from '../../../core/hooks/useNote';
+import ItemContent from '../../../Note/List/ItemContent';
+import {DebounceTouchableOpacity} from '../../../../components';
+import {colors} from '../../../../core/theme';
+import {Note, NoteType} from '../../../../core/hooks/useNote';
 import {useNavigation} from '@react-navigation/native';
 
 export enum ContentType {
@@ -20,7 +20,8 @@ export default (
     saveNote: (note: Note) => void;
   },
 ) => {
-  const {shareNote, removeNote, saveNote, ...note} = params;
+  const nope = () => {};
+  const {saveNote = nope, ...note} = params;
   const {type, title, createTime, content} = note;
   const isHitText = type === NoteType.Text;
 
