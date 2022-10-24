@@ -13,6 +13,8 @@ import VoiceScreen from './src/pages/Voice';
 import {Preview} from './src/pages/NewNote/preview';
 import {StatusBar} from 'react-native';
 import {RootSiblingParent} from 'react-native-root-siblings';
+import store from '~/store';
+import {Provider} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
@@ -91,6 +93,8 @@ function App() {
 
 export default () => (
   <RootSiblingParent>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </RootSiblingParent>
 );

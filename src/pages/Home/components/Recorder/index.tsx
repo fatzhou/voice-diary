@@ -17,6 +17,7 @@ import AudioRecorderPlayer, {
   OutputFormatAndroidType,
   RecordBackType,
 } from 'react-native-audio-recorder-player';
+import LinearGradient from 'react-native-linear-gradient';
 import {DebounceTouchableOpacity} from '~/components';
 import {usePageInsets} from '~/core/hooks';
 import images from '~/core/images';
@@ -228,25 +229,33 @@ export default () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      {/* <View style={styles.top}> */}
-      <Image style={styles.logo} source={speakingInfo.logo} />
-      <Text style={styles.desc}>{speakingInfo.text}</Text>
-      <Image style={styles.close} source={images.home.close} />
-      <View style={styles.dividerWrapper}>
-        <Image style={styles.divider} source={images.home.divider} />
-      </View>
+    <SafeAreaView style={styles.flex}>
+      <LinearGradient
+        colors={[
+          'rgba(255, 255, 255, 0)',
+          'rgba(255, 255, 255, 0)',
+          'rgba(255, 255, 255, 1)',
+        ]}
+        style={styles.container}>
+        {/* <View style={styles.top}> */}
+        <Image style={styles.logo} source={speakingInfo.logo} />
+        <Text style={styles.desc}>{speakingInfo.text}</Text>
+        <Image style={styles.close} source={images.home.close} />
+        <View style={styles.dividerWrapper}>
+          <Image style={styles.divider} source={images.home.divider} />
+        </View>
 
-      {/* </View> */}
-      <DebounceTouchableOpacity
-        activeOpacity={0.8}
-        style={{
-          marginBottom: pageInsets.bottom + 20,
-        }}
-        onLongPress={onAdd}
-        onPressOut={onSave}>
-        <Image source={images.home.add} style={styles.addNote} />
-      </DebounceTouchableOpacity>
+        {/* </View> */}
+        <DebounceTouchableOpacity
+          activeOpacity={0.8}
+          style={{
+            marginBottom: pageInsets.bottom + 20,
+          }}
+          onLongPress={onAdd}
+          onPressOut={onSave}>
+          <Image source={images.home.add} style={styles.addNote} />
+        </DebounceTouchableOpacity>
+      </LinearGradient>
     </SafeAreaView>
   );
 };

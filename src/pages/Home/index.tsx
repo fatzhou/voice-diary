@@ -1,27 +1,12 @@
-import AudioRecorderPlayer, {
-  AVEncoderAudioQualityIOSType,
-  AVEncodingOption,
-  AudioEncoderAndroidType,
-  AudioSourceAndroidType,
-  OutputFormatAndroidType,
-} from 'react-native-audio-recorder-player';
-import type {
-  AudioSet,
-  PlayBackType,
-  RecordBackType,
-} from 'react-native-audio-recorder-player';
 import {
-  Dimensions,
   FlatList,
   Image,
-  PermissionsAndroid,
-  Platform,
   RefreshControl,
   SafeAreaView,
   TouchableOpacity,
   View,
 } from 'react-native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 
 // import RNFetchBlob from 'rn-fetch-blob';
 import images from '~/core/images';
