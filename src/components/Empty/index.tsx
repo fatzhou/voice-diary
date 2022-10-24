@@ -8,16 +8,13 @@ import {
   ImageSourcePropType,
   Button,
 } from 'react-native';
-import {Note} from '../../core/hooks/useNote';
+import {RootStackParamList} from '~/types/page';
 import {colors} from '../../core/theme';
+import {StackNavigationProp} from '@react-navigation/stack';
 
-export default (props: {
-  image: ImageSourcePropType;
-  description: string;
-  saveNote: (note: Note) => void;
-}) => {
-  const {image, description, saveNote} = props;
-  const navigation = useNavigation();
+export default (props: {image: ImageSourcePropType; description: string}) => {
+  const {image, description} = props;
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   return (
     <View style={stylesInfo.container}>
       <Image source={image} />
@@ -26,7 +23,6 @@ export default (props: {
         onPress={() => {
           navigation.navigate('NewNote', {
             note: null,
-            saveNote,
           });
         }}
         title="点我创建"

@@ -5,25 +5,12 @@ import moment from 'moment';
 import ItemContent from '../../../Note/List/ItemContent';
 import {DebounceTouchableOpacity} from '../../../../components';
 import {colors} from '../../../../core/theme';
-import {Note, NoteType} from '../../../../core/hooks/useNote';
 import {useNavigation} from '@react-navigation/native';
+import {Note} from '~/api/note';
 
-export enum ContentType {
-  Text = 1,
-  Sound = 2,
-}
-
-export default (
-  params: Note & {
-    shareNote: (note: Note) => void;
-    removeNote: (id: number) => void;
-    saveNote: (note: Note) => void;
-  },
-) => {
+export default (params: Note) => {
   const nope = () => {};
   const {saveNote = nope, ...note} = params;
-  const {type, title, createTime, content} = note;
-  const isHitText = type === NoteType.Text;
 
   const formatTime = useCallback((time: string) => {
     return moment(Number(time)).format('DD/MM/YYYY HH:mm:ss');
@@ -41,10 +28,10 @@ export default (
   return (
     <DebounceTouchableOpacity activeOpacity={1} onPress={goDetail}>
       <View style={styles.container}>
-        <ItemHeader
+        {/* <ItemHeader
           title={isHitText ? title : formatTime(String(createTime))}
           type={type}
-        />
+        /> */}
         <ItemContent type={type} content={content} />
       </View>
     </DebounceTouchableOpacity>

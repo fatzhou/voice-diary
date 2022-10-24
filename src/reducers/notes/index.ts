@@ -93,5 +93,8 @@ export const {remove} = notesSlice.actions;
 
 // \Other code such as selectors can use the imported `RootState` type
 export const selectNotes = (state: RootState) => state.notesReducer.notes;
+export const loadingNotes = (state: RootState) => state.notesReducer.loading;
+export const initializedNotes = (state: RootState) =>
+  state.notesReducer.initialized;
 
 export default notesSlice.reducer;

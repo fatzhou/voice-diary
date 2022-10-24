@@ -12,15 +12,22 @@ import React, {useCallback, useEffect, useState} from 'react';
 import images from '~/core/images';
 import {useNavigation} from '@react-navigation/native';
 import {DebounceTouchableOpacity, Empty} from '~/components';
-import {PageName} from '~/types/page';
+import {PageName, RootStackParamList} from '~/types/page';
 import styles from './index.styles';
 import ItemSeparator from './components/ItemSeparator';
 import ListItem from './components/ListItem';
 import {usePageInsets} from '~/core/hooks';
 import Recorder from './components/Recorder';
+import {initializedNotes, loadingNotes, selectNotes} from '~/reducers/notes';
+import {useSelector} from 'react-redux';
+import {Note} from '~/api/note';
+import {StackNavigationProp} from '@react-navigation/stack';
 
 const HomeScreen = () => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const notes = useSelector(selectNotes);
+  const loading = useSelector(loadingNotes);
+  const initialized = useSelector(initializedNotes);
 
   useEffect(() => {
     // Use `setOptions` to update the button that we previously specified
@@ -44,14 +51,6 @@ const HomeScreen = () => {
     navigation.navigate(name, params);
   };
 
-  const [notes, setNotes] = useState([]);
-  const saveNote = () => {};
-  const nope = () => {};
-
-  const [status, setStatus] = useState({
-    loading: true,
-  });
-
   const handleRefresh = useCallback(() => {}, []);
   const pagesets = usePageInsets();
 
@@ -61,7 +60,7 @@ const HomeScreen = () => {
         <View style={styles.wrapper}>
           <FlatList
             keyExtractor={(item: any) => item.id}
-            scrollEnabled={!status.loading}
+            scrollEnabled={!loading}
             data={notes}
             initialNumToRender={4}
             ItemSeparatorComponent={() => <ItemSeparator />}
@@ -70,25 +69,18 @@ const HomeScreen = () => {
                 <Empty
                   image={images.public.empty}
                   description="您还没有创建过余音日记"
-                  saveNote={saveNote}
                 />
               </View>
             }
             refreshControl={
               <RefreshControl
                 colors={[]} // 仅android
-                refreshing={status.loading}
+                refreshing={loading}
                 onRefresh={handleRefresh}
               />
             }
-            renderItem={({item}) => (
-              <ListItem
-                {...item}
-                key={item.id}
-                saveNote={saveNote}
-                shareNote={nope}
-                removeNote={nope}
-              />
+            renderItem={({item}: {item: Note}) => (
+              <ListItem {...item} key={item.id} />
             )}
           />
           <DebounceTouchableOpacity
