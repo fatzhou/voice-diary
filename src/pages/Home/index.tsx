@@ -53,15 +53,20 @@ const HomeScreen = () => {
 
   const handleRefresh = useCallback(() => {}, []);
   const pagesets = usePageInsets();
+  const [modalVisible, showModalVisible] = useState(true);
+
+  const onAdd = () => {
+    showModalVisible(true);
+  };
 
   return (
-    <>
-      <SafeAreaView>
+    <View style={styles.flex}>
+      <SafeAreaView style={styles.flex}>
         <View style={styles.wrapper}>
           <FlatList
             keyExtractor={(item: any) => item.id}
             scrollEnabled={!loading}
-            data={notes}
+            data={[]}
             initialNumToRender={4}
             ItemSeparatorComponent={() => <ItemSeparator />}
             ListEmptyComponent={
@@ -88,19 +93,22 @@ const HomeScreen = () => {
             style={{
               bottom: pagesets.bottom + 20,
             }}
-            onLongPress={() => {}}
+            onLongPress={onAdd}
             onPress={() =>
               goPage('NewNote', {
                 note: null,
-                saveNote,
               })
             }>
             <Image source={images.home.add} style={styles.addNote} />
           </DebounceTouchableOpacity>
         </View>
       </SafeAreaView>
-      <Recorder />
-    </>
+      {modalVisible && (
+        <View style={[styles.modal]}>
+          <Recorder />
+        </View>
+      )}
+    </View>
   );
 };
 

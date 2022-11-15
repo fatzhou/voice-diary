@@ -51,12 +51,14 @@ const path = Platform.select({
 });
 
 const screenWidth = Dimensions.get('screen').width;
-
 export default () => {
   const pageInsets = usePageInsets();
-  const [speaking, setSpeaking] = useState<SpeakingType>({
+  const [speaking, setSpeaking] = useState<{
+    status: SpeakingStatus;
+  }>({
     status: SpeakingStatus.Normal,
-    isLoggingIn: false,
+  });
+  const speakingStatus = useRef({
     recordSecs: 0,
     recordTime: '00:00:00',
     currentPositionSec: 0,
@@ -66,19 +68,19 @@ export default () => {
   });
   const audioRecorderPlayer = useRef(new AudioRecorderPlayer());
 
-  const speakingInfo = useMemo(() => {
-    if (speaking.status === SpeakingStatus.Normal) {
-      return {
-        logo: images.home.audio,
-        text: '保持长按，开始说话',
-      };
-    } else {
-      return {
-        logo: images.home.revoke,
-        text: '松开保存，上滑取消',
-      };
-    }
-  }, [speaking]);
+  // const speakingInfo = useMemo(() => {
+  //   if (speaking.status === SpeakingStatus.Normal) {
+  //     return {
+  //       logo: images.home.audio,
+  //       text: '保持长按，开始说话',
+  //     };
+  //   } else {
+  //     return {
+  //       logo: images.home.revoke,
+  //       text: '松开保存，上滑取消',
+  //     };
+  //   }
+  // }, [speaking]);
 
   const onAdd = async (): Promise<void> => {
     console.log('onadd..........');
@@ -124,25 +126,35 @@ export default () => {
 
     console.log('audioSet', audioSet);
 
+    setSpeaking(prev => ({
+      ...prev,
+      status: SpeakingStatus.Doing,
+    }));
+
     const uri = await audioRecorderPlayer.current.startRecorder(path, audioSet);
 
     audioRecorderPlayer.current.addRecordBackListener((e: RecordBackType) => {
       // console.log('record-back', e);
-      setSpeaking(prev => ({
-        ...prev,
+      speakingStatus.current = {
+        ...speakingStatus.current,
         recordSecs: e.currentPosition,
         recordTime: audioRecorderPlayer.current.mmssss(
           Math.floor(e.currentPosition),
         ),
-      }));
+      };
     });
     console.log(`uri: ${uri}`);
   };
 
   const onSave = () => {
-    onStopRecord();
-
-    setTimeout(onStartPlay, 1000);
+    if (speaking.status === SpeakingStatus.Doing) {
+      onStopRecord();
+      setSpeaking(prev => ({
+        ...prev,
+        status: SpeakingStatus.Normal,
+      }));
+      // setTimeout(onStartPlay, 1000);
+    }
   };
 
   const playWidth = speaking.currentDurationSec
@@ -228,32 +240,87 @@ export default () => {
     audioRecorderPlayer.current.removePlayBackListener();
   };
 
+  const [focus, setFocus] = useState<undefined | 'cancel' | 'transfer'>(
+    undefined,
+  );
+
   return (
-    <SafeAreaView style={styles.flex}>
+    <SafeAreaView style={[styles.flex]}>
       <LinearGradient
-        colors={[
-          'rgba(255, 255, 255, 0)',
-          'rgba(255, 255, 255, 0)',
-          'rgba(255, 255, 255, 1)',
-        ]}
-        style={styles.container}>
-        {/* <View style={styles.top}> */}
-        <Image style={styles.logo} source={speakingInfo.logo} />
+        colors={['rgba(255, 255, 255, 0)', 'rgba(255, 255, 255, 1)']}
+        start={{x: 0, y: 500}}
+        style={[
+          styles.container,
+          {
+            paddingBottom: pageInsets.bottom + 20,
+          },
+        ]}>
+        {/* <Image style={styles.logo} source={speakingInfo.logo} />
         <Text style={styles.desc}>{speakingInfo.text}</Text>
         <Image style={styles.close} source={images.home.close} />
         <View style={styles.dividerWrapper}>
           <Image style={styles.divider} source={images.home.divider} />
+        </View> */}
+        <View style={styles.buttons}>
+          <View style={styles.buttonContainer}>
+            {focus === 'cancel' && (
+              <View style={styles.tips}>
+                <Text style={styles.tipsText}>松开取消</Text>
+              </View>
+            )}
+            <DebounceTouchableOpacity
+              style={[
+                styles.button,
+                focus === 'cancel' && styles.focusContainer,
+                focus === 'cancel' && {bottom: 0},
+              ]}>
+              <Image
+                style={[styles.close]}
+                source={focus === 'cancel' ? images.home.close : images.close}
+              />
+            </DebounceTouchableOpacity>
+          </View>
+          <View style={styles.buttonContainer}>
+            {focus === 'transfer' && (
+              <View style={styles.tips}>
+                <Text style={styles.tipsText}>转文字</Text>
+              </View>
+            )}
+            <DebounceTouchableOpacity
+              style={[
+                styles.button,
+                focus === 'transfer' && styles.focusContainer,
+                focus === 'transfer' && {bottom: 0},
+              ]}>
+              <Text
+                style={[styles.text, focus === 'transfer' && styles.focusText]}>
+                文
+              </Text>
+            </DebounceTouchableOpacity>
+          </View>
         </View>
-
-        {/* </View> */}
         <DebounceTouchableOpacity
           activeOpacity={0.8}
-          style={{
-            marginBottom: pageInsets.bottom + 20,
-          }}
+          style={[
+            {
+              marginBottom: pageInsets.bottom + 20,
+              width: 50,
+              height: 50,
+              borderRadius: 25,
+            },
+          ]}
           onLongPress={onAdd}
           onPressOut={onSave}>
-          <Image source={images.home.add} style={styles.addNote} />
+          <Image
+            source={images.home.add}
+            style={[
+              styles.addNote,
+              speaking.status === SpeakingStatus.Doing && {opacity: 0.3},
+            ]}
+          />
+          {speaking.status === SpeakingStatus.Doing && (
+            <View style={styles.addNoteSpeaking} />
+          )}
         </DebounceTouchableOpacity>
       </LinearGradient>
     </SafeAreaView>
